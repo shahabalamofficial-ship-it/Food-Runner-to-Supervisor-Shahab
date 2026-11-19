@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Food Runner to Supervisor — Shahab</title>
+<meta name="description" content="A personal 30-day hospitality learning system: service sequence, menu knowledge, guest confidence and leadership foundations.">
+<style>
+:root{--bg:#101820;--panel:#192833;--panel2:#213541;--line:#40515b;--gold:#d9b56d;--cream:#f5f0e6;--muted:#b9c4c9;--green:#8dc5a1;--red:#e59a8a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:12px}
+body{margin:0;background:linear-gradient(135deg,#101820,#182a32) fixed;color:var(--cream);font:16px/1.6 Georgia,"Times New Roman",serif}
+h1,h2,h3,summary,button,nav a,.tag{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:860px;margin:auto;padding:22px 16px 70px}
+.hero{padding:28px 22px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(120deg,#213541,#14232c)}
+.hero h1{font-size:clamp(2rem,7vw,3.2rem);line-height:1.05;margin:0 0 10px;letter-spacing:-.01em}
+.hero p{margin:0 0 14px;color:var(--muted);max-width:60ch}
+.quote{border-left:3px solid var(--gold);padding:8px 14px;background:#ffffff08;font-style:italic;max-width:60ch}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+nav a{color:var(--cream);text-decoration:none;font-size:.88rem;border:1px solid var(--line);border-radius:999px;padding:6px 13px;background:var(--panel)}
+nav a:hover,nav a:focus-visible{border-color:var(--gold);color:var(--gold)}
+h2{font-size:1.25rem;color:var(--gold);margin:32px 0 10px}
+h3{font-size:1rem;margin:18px 0 6px;color:var(--cream)}
+p,li{color:var(--cream)}
+.muted{color:var(--muted);font-size:.92rem}
+section.track{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.bar{height:9px;background:#344650;border-radius:9px;overflow:hidden;margin:10px 0 6px}
+.bar i{display:block;width:0;height:100%;background:var(--green);transition:width .3s}
+#days{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:12px}
+button{font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:9px;padding:9px 0;cursor:pointer;background:var(--panel2);color:var(--cream)}
+button[aria-pressed=true]{background:var(--green);color:#14232c;border-color:var(--green);font-weight:700}
+button:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button.reset{background:transparent;color:var(--muted);padding:8px 14px;margin-top:12px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:10px 0}
+details[open]{border-color:#5c6f79}
+summary{cursor:pointer;padding:15px 18px;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"–"}
+.body{padding:0 18px 18px}
+.tag{display:inline-block;font-size:.78rem;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:1px 8px;margin-left:8px;font-weight:600}
+ol,ul{padding-left:1.25rem;margin:6px 0}
+li{margin:4px 0}
+.pair{background:#ffffff08;border-radius:10px;padding:10px 14px;margin:8px 0}
+.pair p{margin:2px 0}
+.ur{direction:rtl;text-align:right;font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Noto Naskh Arabic",serif;line-height:2;color:var(--gold)}
+.warn{border-left:3px solid var(--red);padding:8px 14px;background:#e59a8a12;margin:12px 0}
+.table{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--gold);font-family:system-ui,sans-serif;font-weight:600}
+footer{margin-top:34px;color:var(--muted);font-size:.85rem}
+@media(max-width:560px){#days{grid-template-columns:repeat(5,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="hero">
+  <h1>Food Runner to Supervisor</h1>
+  <p>Shahab's personal learning system for Yasmin Palace, The Pearl, Doha. Build skill through practice: accurate service, menu knowledge, calm guest communication and early leadership habits.</p>
+  <div class="quote">My job is to serve every guest with respect and accuracy. A guest's wealth does not make me less valuable.</div>
+</header>
+
+<nav aria-label="Sections">
+  <a href="#progress">Progress</a>
+  <a href="#modules">Modules</a>
+  <a href="#roadmap">Roadmap</a>
+</nav>
+
+<h2 id="progress">Your progress</h2>
+<section class="track">
+  <p class="muted" style="margin:0">Mark a day complete only after you pass its mastery check (80% or higher, and every safety point correct). Saved on this device only.</p>
+  <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" id="pb"><i id="fill"></i></div>
+  <div id="count" class="muted">0 of 30 days completed</div>
+  <div id="days"></div>
+  <button class="reset" id="reset" type="button">Reset progress</button>
+</section>
+
+<h2 id="modules">Modules</h2>
+
+<details open>
+<summary>Day 1: Professional identity <span class="tag">Start here</span></summary>
+<div class="body">
+  <p><strong>Goal:</strong> understand what a reliable Food Runner owns, and how to speak up instead of guessing.</p>
+  <div class="pair"><p>My responsibility is to deliver the correct dish to the correct guest, safely and politely.</p>
+  <p class="ur" lang="ur" dir="rtl">میری ذمہ داری ہے کہ صحیح کھانا صحیح مہمان تک، محفوظ اور باادب طریقے سے پہنچاؤں۔</p></div>
+  <h3>Before you carry a dish</h3>
+  <ol><li>Confirm the dish name.</li><li>Confirm the table number and seat position using the restaurant's system.</li><li>Check presentation and accompaniments against the ticket or SOP.</li></ol>
+  <p>If anything is unclear, ask the pass, kitchen or captain. Never guess.</p>
+  <h3>Phrases</h3>
+  <div class="pair"><p>"Excuse me. May I place this here?"</p><p class="ur" lang="ur" dir="rtl">معاف کیجیے گا، کیا میں یہ پلیٹ یہاں رکھ سکتا ہوں؟</p></div>
+  <div class="pair"><p>"This is your [dish name]. Please enjoy."</p><p class="ur" lang="ur" dir="rtl">یہ آپ کی [ڈش کا نام] ہے۔ نوش فرمائیے۔</p></div>
+  <div class="pair"><p>"I want to make sure I give you the correct information. Let me confirm that with the kitchen."</p><p class="ur" lang="ur" dir="rtl">میں چاہتا ہوں کہ آپ کو درست معلومات دوں۔ میں کچن سے تصدیق کر کے بتاتا ہوں۔</p></div>
+  <h3>Role-play</h3>
+  <p>A guest asks if a dish contains nuts and you are not certain. Do not guess and do not say "it's safe". Tell the guest you will verify, tell the captain and kitchen, and follow the restaurant's allergy procedure.</p>
+  <h3>Mastery check</h3>
+  <ol><li>What are the three checks before delivering a dish?</li><li>What do you say when you need to confirm an ingredient?</li><li>Why must you never guess about allergens?</li></ol>
+  <p class="muted">Pass rule: 3 of 3 correct, plus a spoken role-play with no unsafe promise. If you miss, repeat the lesson.</p>
+</div>
+</details>
+
+<details>
+<summary>Sequence of Service</summary>
+<div class="body">
+  <p class="muted">A learning framework. The restaurant's written SOP and your manager's instructions always come first.</p>
+  <ol>
+    <li><strong>Prepare:</strong> clean section, correct setup, station ready.</li>
+    <li><strong>Welcome:</strong> greet warmly with the approved greeting.</li>
+    <li><strong>First contact:</strong> introduce yourself if appropriate; help without hovering.</li>
+    <li><strong>Allergy awareness:</strong> ask and pass on allergies per the restaurant procedure before recommending or serving.</li>
+    <li><strong>Beverages:</strong> clarify still or sparkling and send through the correct system.</li>
+    <li><strong>Order coordination:</strong> make sure details and modifications are passed on accurately.</li>
+    <li><strong>Delivery:</strong> match dish to seat, say the dish name, ask permission before placing.</li>
+    <li><strong>Check-back:</strong> return at the right time without interrupting the conversation.</li>
+    <li><strong>Clear and reset:</strong> follow course timing and guest cues; ask before removing anything uncertain.</li>
+    <li><strong>Farewell:</strong> thank guests sincerely and leave the area ready.</li>
+  </ol>
+  <div class="warn">Confirm locally: exact Yasmin Palace wording, timing, table numbers, POS steps and clearing rules, only after your trainer or manager confirms them.</div>
+</div>
+</details>
+
+<details>
+<summary>Menu Mastery</summary>
+<div class="body">
+  <p>Learn one verified dish at a time. A dish is "known" only when every line below is sourced from the menu or confirmed by the kitchen.</p>
+  <h3>Dish card</h3>
+  <ul>
+    <li>Exact dish name, category and menu page</li>
+    <li>Verification status: not verified, checked against menu, or confirmed by kitchen (with date)</li>
+    <li>Ingredients exactly as the menu states them, with a simple Urdu meaning</li>
+    <li>A 15 to 30 second guest explanation, with no unsupported claims</li>
+    <li>Taste and preparation: write "Not confirmed" until you have tasted it or the kitchen confirms</li>
+    <li>Allergens: what the menu declares, and "must confirm with kitchen" for sauces, garnish, substitutions and cross-contact</li>
+    <li>Likely guest questions with verified answers</li>
+  </ul>
+  <div class="warn">Never say "100% safe" about allergens. Only the restaurant's formal allergen process can say that.</div>
+  <p class="muted">Do not copy menus or internal SOPs into this public repo without permission.</p>
+</div>
+</details>
+
+<details>
+<summary>Guest Confidence</summary>
+<div class="body">
+  <ul>
+    <li><strong>Eye contact:</strong> brief and warm, not staring.</li>
+    <li><strong>Voice:</strong> slow and clear. Slower sounds more confident than louder.</li>
+    <li><strong>Posture:</strong> hands visible, shoulders relaxed, no phone on the floor.</li>
+    <li><strong>Mindset:</strong> you are a professional doing skilled work, whoever the guest is.</li>
+  </ul>
+  <h3>English recovery phrases</h3>
+  <div class="pair"><p>"Sorry, could you repeat that, please?"</p><p class="ur" lang="ur" dir="rtl">معذرت، کیا آپ دوبارہ بتا سکتے ہیں؟</p></div>
+  <div class="pair"><p>"One moment, I will check for you."</p><p class="ur" lang="ur" dir="rtl">ایک لمحہ، میں آپ کے لیے معلوم کرتا ہوں۔</p></div>
+  <div class="pair"><p>"I apologize. Let me correct that for you."</p><p class="ur" lang="ur" dir="rtl">میں معذرت چاہتا ہوں۔ میں ابھی اسے درست کرواتا ہوں۔</p></div>
+  <p class="muted">Practice each phrase aloud 5 times a day until you can say it without reading.</p>
+</div>
+</details>
+
+<details>
+<summary>Family Table Service</summary>
+<div class="body">
+  <p>The usual failure is not dropping a plate. It is the wrong dish to the wrong person, reaching across a guest, or losing track of modifications and allergies.</p>
+  <h3>Before leaving the pass</h3>
+  <ol><li>Confirm the table number.</li><li>Confirm each dish and its modifiers.</li><li>Use the restaurant's seat numbering if there is one.</li><li>No reliable seat map? Ask the captain, or confirm politely at the table.</li><li>Never identify a dish by guessing from how it looks.</li></ol>
+  <h3>At the table</h3>
+  <ul><li>Approach from the safest, least disruptive side, as your restaurant trains.</li><li>Do not reach across a guest, and never pass hot plates over a child.</li><li>Ask permission, then announce the exact dish name.</li><li>If unsure, confirm quietly: "May I confirm, is this the grilled [dish] for you?"</li><li>Take extra care with allergy and special-request dishes.</li></ul>
+  <h3>If you make a mistake</h3>
+  <ol><li>Stop. Do not pretend it didn't happen.</li><li>Apologize briefly.</li><li>Do not move food between guests without permission.</li><li>Tell the captain immediately and follow their instruction.</li><li>Report it as the restaurant requires.</li></ol>
+  <div class="pair"><p>"Excuse me, may I confirm who ordered the [dish name]?"</p><p class="ur" lang="ur" dir="rtl">معاف کیجیے گا، کیا میں تصدیق کر سکتا ہوں کہ [ڈش کا نام] کس نے آرڈر کی تھی؟</p></div>
+</div>
+</details>
+
+<details>
+<summary>Captain and Supervisor Foundations</summary>
+<div class="body">
+  <ul>
+    <li><strong>Briefing:</strong> before service, share the covers, VIPs, allergies, specials and any item out of stock.</li>
+    <li><strong>Section awareness:</strong> scan your whole section every few minutes, not only your own tables.</li>
+    <li><strong>Delegation:</strong> give a clear task, a clear time, and check it was done.</li>
+    <li><strong>Service checks:</strong> watch timing from order to table, and empty glasses and plates.</li>
+    <li><strong>Escalation:</strong> safety, allergy, complaint and billing problems go to the manager straight away.</li>
+    <li><strong>Handover:</strong> tell the next shift what is open, what is pending and what guests were promised.</li>
+  </ul>
+  <p class="muted">Leadership is earned on shift through consistent work and manager feedback. This section is preparation, not a promise of promotion.</p>
+</div>
+</details>
+
+<h2 id="roadmap">30-day roadmap</h2>
+<p class="muted">A foundation plan, not a promotion in 30 days. If a lesson isn't mastered, repeat it. The calendar can stretch.</p>
+<div class="table">
+<table>
+  <thead><tr><th>Days</th><th>Stage</th><th>Outcome</th></tr></thead>
+  <tbody>
+    <tr><td>1–3</td><td>Food Runner foundations</td><td>Role clarity, layout, communication, safety</td></tr>
+    <tr><td>4–7</td><td>Sequence of Service</td><td>Welcome to farewell, order flow, clearing</td></tr>
+    <tr><td>8–14</td><td>Menu knowledge I</td><td>One verified dish at a time</td></tr>
+    <tr><td>15–18</td><td>Menu knowledge II</td><td>Mains, sides, sauces, beverages, comparisons</td></tr>
+    <tr><td>19–21</td><td>Guest confidence</td><td>Eye contact, calm voice, English recovery phrases</td></tr>
+    <tr><td>22–24</td><td>Family table</td><td>Seat mapping, correct delivery, safe placement</td></tr>
+    <tr><td>25–27</td><td>Waiter / senior runner</td><td>Order accuracy, follow-up, complaint recovery</td></tr>
+    <tr><td>28–29</td><td>Captain foundations</td><td>Briefing, section control, team coordination</td></tr>
+    <tr><td>30</td><td>Supervisor foundations</td><td>Delegation, handover, escalation, final assessment</td></tr>
+  </tbody>
+</table>
+</div>
+<h3>Daily lesson gate</h3>
+<p>A lesson is complete when you can: explain it in your own words, say the guest script without reading, pass a realistic role-play, score 80% or higher on recall, and say when to ask a manager instead of guessing. Missing any safety or order-accuracy point means the lesson is not passed.</p>
+<h3>Daily session (40 to 50 minutes)</h3>
+<p>Revision 10 · New topic 15 · Spoken practice 10 · Scenarios 10 · Test and log 5.</p>
+
+<footer>
+  Personal learning project by Shahab. Not an official Yasmin Palace document. Confirm uncertain standards with your manager, and do not share restaurant menus, internal SOPs or confidential material without permission.
+</footer>
+</main>
+
+<script>
+(function(){
+  var KEY='shahab-fnb-progress-v1', done=[];
+  try{ done=JSON.parse(localStorage.getItem(KEY)||'[]'); if(!Array.isArray(done)) done=[]; }catch(e){ done=[]; }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(done)); }catch(e){} }
+  var host=document.getElementById('days');
+  for(var i=1;i<=30;i++){
+    (function(n){
+      var b=document.createElement('button');
+      b.type='button'; b.textContent=n; b.setAttribute('aria-label','Day '+n);
+      b.onclick=function(){ done = done.indexOf(n)>-1 ? done.filter(function(x){return x!==n}) : done.concat(n); save(); render(); };
+      host.appendChild(b);
+    })(i);
+  }
+  function render(){
+    Array.prototype.forEach.call(host.children,function(b,i){ b.setAttribute('aria-pressed', done.indexOf(i+1)>-1); });
+    document.getElementById('fill').style.width=(done.length/30*100)+'%';
+    document.getElementById('pb').setAttribute('aria-valuenow',done.length);
+    document.getElementById('count').textContent=done.length+' of 30 days completed';
+  }
+  document.getElementById('reset').onclick=function(){
+    if(confirm('Reset all progress on this device?')){ done=[]; try{localStorage.removeItem(KEY);}catch(e){} render(); }
+  };
+  render();
+})();
+</script>
+</body>
+</html>
